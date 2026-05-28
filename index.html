@@ -187,7 +187,7 @@ let productsLoaded = false;
 window.onload = async function() {
   const statusEl = document.getElementById("cloud-status");
   try {
-    const response = await fetch(WEB_APP_URL);
+    const response = await fetch(WEB_APP_URL { redirect: "follow" });
     PRODUCTS = await response.json();
     productsLoaded = true;
     const count = Object.keys(PRODUCTS).length;
@@ -325,7 +325,7 @@ async function saveRecord(rec) {
   showToast("⏳ กำลังบันทึกข้อมูลลงฐานข้อมูล...", "");
   try {
     const response = await fetch(WEB_APP_URL, {
-      method: "POST", body: JSON.stringify(rec), headers: { "Content-Type": "text/plain" }
+      method: "POST", body: JSON.stringify(rec), headers: { "Content-Type": "text/plain" }, redirect: "follow"
     });
     const result = await response.json();
     if (result.status === "success") {
