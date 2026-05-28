@@ -324,21 +324,32 @@ function confirmPassword() {
 async function saveRecord(rec) {
   showToast("⏳ กำลังบันทึกข้อมูลลงฐานข้อมูล...", "");
   try {
-    await fetch(WEB_APP_URL, {
+    // ใช้ fetch แบบมาตรฐานเหมือนตอนดึงข้อมูล (เปิด redirect: "follow")
+    const response = await fetch(WEB_APP_URL, {
       method: "POST", 
       body: JSON.stringify(rec), 
       headers: { "Content-Type": "text/plain" },
-      mode: "no-cors"
+      redirect: "follow"
     });
     
-    const now = new Date();
-    const dt = now.toLocaleDateString("th-TH",{day:"2-digit",month:"2-digit",year:"numeric"}) + " " + now.toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"});
-    history.unshift({ ...rec, dt, id: history.length + 1 });
-    renderHistory(); resetForm();
-    showToast(rec.type === "receive" ? "✔ บันทึกรับเข้าสำเร็จ!" : "✔ บันทึกการเบิกสำเร็จ!", "success");
+    // รอรับคำตอบยืนยันจาก Google ว่าบันทึกลงตารางสำเร็จจริงๆ
+    const result = await response.json();
+    
+    if (result.status === "success") {
+      const now = new Date();
+      const dt = now.toLocaleDateString("th-TH",{day:"2-digit",month:"2-digit",year:"numeric"}) + " " + now.toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"});
+      history.unshift({ ...rec, dt, id: history.length + 1 });
+      renderHistory(); 
+      resetForm();
+      showToast(rec.type === "receive" ? "✔ บันทึกรับเข้าสำเร็จ!" : "✔ บันทึกการเบิกสำเร็จ!", "success");
+    } else {
+      // ถ้า Google แจ้ง Error กลับมา จะแสดงข้อความจริงๆ ให้เห็น
+      showToast("❌ Google แจ้งว่า: " + result.message, "error");
+    }
     
   } catch (error) {
-    showToast("❌ ส่งข้อมูลไม่สำเร็จ ตรวจสอบอินเทอร์เน็ต", "error");
+    // ถ้าเบราว์เซอร์มีปัญหา จะแสดง Error สีแดงชัดเจนว่าติดอะไร
+    showToast("❌ ส่งข้อมูลไม่สำเร็จ: " + error.message, "error");
   }
 }
 
