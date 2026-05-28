@@ -7,157 +7,79 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; min-height: 100vh; }
-  .header {
-    background: linear-gradient(135deg, #1F3864 0%, #2E75B6 100%);
-    color: white; padding: 18px 24px;
-    display: flex; align-items: center; gap: 14px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-  }
+  .header { background: linear-gradient(135deg, #1F3864 0%, #2E75B6 100%); color: white; padding: 18px 24px; display: flex; align-items: center; gap: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
   .header-logo { font-size: 28px; }
   .header h1 { font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
   .header p { font-size: 11px; opacity: 0.75; margin-top: 2px; }
   .container { max-width: 820px; margin: 30px auto; padding: 0 16px 60px; }
   .tabs { display: flex; gap: 0; margin-bottom: 0; border-radius: 10px 10px 0 0; overflow: hidden; }
-  .tab-btn {
-    flex: 1; padding: 14px; font-size: 15px; font-weight: 600; border: none; cursor: pointer;
-    transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
-  }
+  .tab-btn { flex: 1; padding: 14px; font-size: 15px; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
   .tab-btn.receive { background: #e8f5e9; color: #2e7d32; }
   .tab-btn.withdraw { background: #fdecea; color: #c62828; }
   .tab-btn.receive.active { background: #2e7d32; color: white; }
   .tab-btn.withdraw.active { background: #c62828; color: white; }
   .tab-btn:hover:not(.active) { filter: brightness(0.95); }
-  .card {
-    background: white; border-radius: 0 0 12px 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    padding: 28px;
-  }
-  .section-title {
-    font-size: 13px; font-weight: 700; color: #888; text-transform: uppercase;
-    letter-spacing: 1px; margin-bottom: 16px; padding-bottom: 8px;
-    border-bottom: 2px solid #f0f0f0;
-  }
+  .card { background: white; border-radius: 0 0 12px 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 28px; }
+  .section-title { font-size: 13px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #f0f0f0; }
   .form-row { display: flex; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
   .form-group { flex: 1; min-width: 200px; }
   .form-group.full { flex: 100%; }
   label { display: block; font-size: 12px; font-weight: 600; color: #555; margin-bottom: 6px; }
   label .req { color: #e53935; margin-left: 2px; }
-  input, select, textarea {
-    width: 100%; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 8px;
-    font-size: 14px; font-family: inherit; transition: border 0.2s, box-shadow 0.2s;
-    background: #fafafa;
-  }
-  input:focus, select:focus, textarea:focus {
-    outline: none; border-color: #2E75B6; box-shadow: 0 0 0 3px rgba(46,117,182,0.12);
-    background: white;
-  }
+  input, select, textarea { width: 100%; padding: 10px 14px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit; transition: border 0.2s, box-shadow 0.2s; background: #fafafa; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: #2E75B6; box-shadow: 0 0 0 3px rgba(46,117,182,0.12); background: white; }
   input.error, select.error { border-color: #e53935; background: #fff8f8; }
   .product-wrap { position: relative; }
-  .autocomplete-list {
-    position: absolute; top: 100%; left: 0; right: 0; background: white;
-    border: 1.5px solid #2E75B6; border-top: none; border-radius: 0 0 8px 8px;
-    max-height: 200px; overflow-y: auto; z-index: 100;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-  }
-  .autocomplete-list div {
-    padding: 10px 14px; cursor: pointer; font-size: 13px;
-    border-bottom: 1px solid #f0f0f0; transition: background 0.1s;
-  }
+  .autocomplete-list { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1.5px solid #2E75B6; border-top: none; border-radius: 0 0 8px 8px; max-height: 200px; overflow-y: auto; z-index: 100; box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+  .autocomplete-list div { padding: 10px 14px; cursor: pointer; font-size: 13px; border-bottom: 1px solid #f0f0f0; transition: background 0.1s; }
   .autocomplete-list div:hover, .autocomplete-list div.selected { background: #e3f0ff; }
   .autocomplete-list div span.code { font-weight: 700; color: #1F3864; margin-right: 8px; }
   .autocomplete-list div span.name { color: #444; }
-  .withdraw-options {
-    background: #fff8e1; border: 1.5px solid #ffcc02; border-radius: 10px;
-    padding: 18px; margin-bottom: 18px;
-  }
+  .withdraw-options { background: #fff8e1; border: 1.5px solid #ffcc02; border-radius: 10px; padding: 18px; margin-bottom: 18px; }
   .withdraw-options .section-title { color: #f57f17; border-color: #ffe082; }
   .radio-group { display: flex; gap: 12px; flex-wrap: wrap; }
-  .radio-label {
-    display: flex; align-items: center; gap: 8px; padding: 10px 16px;
-    border: 1.5px solid #ddd; border-radius: 8px; cursor: pointer;
-    font-size: 14px; font-weight: 500; transition: all 0.2s; background: white;
-    flex: 1; justify-content: center;
-  }
+  .radio-label { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1.5px solid #ddd; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.2s; background: white; flex: 1; justify-content: center; }
   .radio-label:hover { border-color: #2E75B6; }
   .radio-label input[type=radio] { width: auto; accent-color: #2E75B6; }
   .radio-label.active-customer { border-color: #1976d2; background: #e3f2fd; color: #1565c0; }
   .radio-label.active-borrow { border-color: #7b1fa2; background: #f3e5f5; color: #6a1b9a; }
-  .btn-submit {
-    width: 100%; padding: 15px; font-size: 16px; font-weight: 700;
-    border: none; border-radius: 10px; cursor: pointer; transition: all 0.2s;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    margin-top: 8px;
-  }
+  .btn-submit { width: 100%; padding: 15px; font-size: 16px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 8px; }
   .btn-submit.receive { background: linear-gradient(135deg, #2e7d32, #43a047); color: white; }
   .btn-submit.withdraw { background: linear-gradient(135deg, #c62828, #ef5350); color: white; }
   .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
   .btn-submit:active { transform: translateY(0); }
-  /* Password Modal */
-  .modal-bg {
-    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
-    z-index: 1000; align-items: center; justify-content: center;
-  }
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
   .modal-bg.show { display: flex; }
-  .modal {
-    background: white; border-radius: 16px; padding: 32px 28px; width: 360px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3); text-align: center;
-  }
+  .modal { background: white; border-radius: 16px; padding: 32px 28px; width: 360px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); text-align: center; }
   .modal h3 { font-size: 18px; margin-bottom: 6px; color: #1F3864; }
   .modal p { color: #888; font-size: 13px; margin-bottom: 20px; }
-  .modal input {
-    text-align: center; font-size: 20px; letter-spacing: 4px;
-    font-weight: 700; border: 2px solid #ddd;
-  }
+  .modal input { text-align: center; font-size: 20px; letter-spacing: 4px; font-weight: 700; border: 2px solid #ddd; }
   .modal input:focus { border-color: #2E75B6; }
   .modal-btns { display: flex; gap: 10px; margin-top: 16px; }
-  .modal-btns button {
-    flex: 1; padding: 12px; border: none; border-radius: 8px;
-    font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s;
-  }
+  .modal-btns button { flex: 1; padding: 12px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .btn-confirm { background: #1F3864; color: white; }
   .btn-confirm:hover { background: #2E75B6; }
   .btn-cancel-modal { background: #f5f5f5; color: #666; }
   .btn-cancel-modal:hover { background: #e0e0e0; }
   .error-msg { color: #e53935; font-size: 13px; margin-top: 10px; font-weight: 600; display: none; }
-  /* Toast */
-  .toast {
-    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
-    background: #1F3864; color: white; padding: 14px 24px; border-radius: 10px;
-    font-size: 14px; font-weight: 600; z-index: 2000;
-    transition: transform 0.3s ease; box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    display: flex; align-items: center; gap: 10px;
-  }
+  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #1F3864; color: white; padding: 14px 24px; border-radius: 10px; font-size: 14px; font-weight: 600; z-index: 2000; transition: transform 0.3s ease; box-shadow: 0 8px 24px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 10px; }
   .toast.show { transform: translateX(-50%) translateY(0); }
   .toast.success { background: #2e7d32; }
   .toast.error { background: #c62828; }
-  /* History */
   .history-section { margin-top: 32px; }
-  .history-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 12px;
-  }
+  .history-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
   .history-title { font-size: 15px; font-weight: 700; color: #1F3864; }
   .history-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  .history-table th {
-    background: #1F3864; color: white; padding: 10px 8px; text-align: left;
-    font-weight: 600; white-space: nowrap;
-  }
+  .history-table th { background: #1F3864; color: white; padding: 10px 8px; text-align: left; font-weight: 600; white-space: nowrap; }
   .history-table td { padding: 9px 8px; border-bottom: 1px solid #f0f0f0; }
   .history-table tr:hover td { background: #f8fbff; }
-  .badge {
-    padding: 3px 9px; border-radius: 20px; font-weight: 700; font-size: 11px;
-    white-space: nowrap;
-  }
+  .badge { padding: 3px 9px; border-radius: 20px; font-weight: 700; font-size: 11px; white-space: nowrap; }
   .badge.receive { background: #e8f5e9; color: #2e7d32; }
   .badge.withdraw { background: #fdecea; color: #c62828; }
   .badge.customer { background: #e3f2fd; color: #1565c0; }
   .badge.borrow { background: #f3e5f5; color: #6a1b9a; }
   .empty-history { text-align: center; padding: 40px; color: #aaa; font-size: 14px; }
-  @media (max-width: 600px) {
-    .form-row { flex-direction: column; }
-    .form-group { min-width: unset; }
-    .modal { width: 90%; }
-  }
+  @media (max-width: 600px) { .form-row { flex-direction: column; } .form-group { min-width: unset; } .modal { width: 90%; } }
 </style>
 </head>
 <body>
@@ -165,8 +87,8 @@
   <div class="header-logo">⚡</div>
   <div>
     <h1>NTI Stock Management</h1>
-    <p>NTI Goup — ระบบจัดการสต็อกสินค้า (Cloud Database)</p>
-    <small id="cloud-status" style="display:block; margin-top:4px; opacity:0.8; color:#fff;">⏳ กำลังโหลดฐานข้อมูลสินค้าจาก Cloud Sheets...</small>
+    <p>Schneider Electric — ระบบจัดการสต็อกสินค้า (Cloud Database)</p>
+    <small id="cloud-status" style="display:block; margin-top:4px; opacity:0.8; color:#fff;">⏳ กำลังโหลดฐานข้อมูลสินค้า...</small>
   </div>
 </div>
 <div class="container">
@@ -174,26 +96,21 @@
     <button class="tab-btn receive active" onclick="switchTab('receive')">📥 รับเข้า</button>
     <button class="tab-btn withdraw" onclick="switchTab('withdraw')">📤 เบิก</button>
   </div>
-  
   <div class="card">
     <div class="section-title" id="form-title">📥 บันทึกการรับสินค้าเข้า</div>
-    
     <div class="form-row">
       <div class="form-group">
         <label>รหัสสินค้า (Material) <span class="req">*</span></label>
         <div class="product-wrap">
-          <input type="text" id="inp-code" placeholder="พิมพ์รหัสสินค้า..." autocomplete="off"
-                 oninput="onCodeInput()" onkeydown="onCodeKeydown(event)">
+          <input type="text" id="inp-code" placeholder="พิมพ์รหัสสินค้า..." autocomplete="off" oninput="onCodeInput()" onkeydown="onCodeKeydown(event)">
           <div class="autocomplete-list" id="autocomplete-list" style="display:none"></div>
         </div>
       </div>
       <div class="form-group">
         <label>ชื่อสินค้า</label>
-        <input type="text" id="inp-name" placeholder="— ยังไม่ได้เลือกสินค้า —" readonly 
-               style="background: #f5f5f5; color: #1F3864; font-weight: 600; cursor: not-allowed;">
+        <input type="text" id="inp-name" placeholder="— ยังไม่ได้เลือกสินค้า —" readonly style="background: #f5f5f5; color: #1F3864; font-weight: 600; cursor: not-allowed;">
       </div>
     </div>
-
     <div class="form-row">
       <div class="form-group" style="max-width:160px">
         <label>จำนวน <span class="req">*</span></label>
@@ -211,16 +128,11 @@
         </select>
       </div>
     </div>
-
     <div class="withdraw-options" id="withdraw-options" style="display:none">
       <div class="section-title">🚚 ประเภทการเบิก</div>
       <div class="form-row" style="margin-bottom:14px">
-        <label class="radio-label" id="lbl-customer" onclick="setWithdrawType('customer')">
-          <input type="radio" name="wtype" value="customer" id="radio-customer"> 📦 ส่งลูกค้า
-        </label>
-        <label class="radio-label" id="lbl-borrow" onclick="setWithdrawType('borrow')">
-          <input type="radio" name="wtype" value="borrow" id="radio-borrow"> 🔄 ยืม
-        </label>
+        <label class="radio-label" id="lbl-customer" onclick="setWithdrawType('customer')"><input type="radio" name="wtype" value="customer" id="radio-customer"> 📦 ส่งลูกค้า</label>
+        <label class="radio-label" id="lbl-borrow" onclick="setWithdrawType('borrow')"><input type="radio" name="wtype" value="borrow" id="radio-borrow"> 🔄 ยืม</label>
       </div>
       <div id="customer-field" style="display:none">
         <label>ชื่อลูกค้า / บริษัทลูกค้า <span class="req">*</span></label>
@@ -231,34 +143,18 @@
         <textarea id="inp-borrow-note" rows="2" placeholder="ระบุวัตถุประสงค์การยืม..."></textarea>
       </div>
     </div>
-
     <div class="form-group full" id="receive-remark-wrap">
       <label>หมายเหตุ</label>
       <input type="text" id="inp-remark" placeholder="หมายเหตุเพิ่มเติม (ถ้ามี)">
     </div>
-
-    <button class="btn-submit receive" id="btn-submit" onclick="handleSubmit()">
-      💾 บันทึกรับเข้า
-    </button>
+    <button class="btn-submit receive" id="btn-submit" onclick="handleSubmit()">💾 บันทึกรับเข้า</button>
   </div>
-
   <div class="history-section">
-    <div class="history-header">
-      <div class="history-title">📋 ประวัติการทำรายการในเซสชั่นนี้ (<span id="hist-count">0</span>)</div>
-    </div>
+    <div class="history-header"><div class="history-title">📋 ประวัติการทำรายการในเซสชั่นนี้ (<span id="hist-count">0</span>)</div></div>
     <div style="overflow-x:auto; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.07)">
       <table class="history-table">
-        <thead>
-          <tr>
-            <th>#</th><th>วันที่-เวลา</th><th>ประเภท</th>
-            <th>รหัสสินค้า</th><th>ชื่อสินค้า</th>
-            <th>จำนวน</th><th>ผู้ทำรายการ</th>
-            <th>ลูกค้า/หมายเหตุ</th>
-          </tr>
-        </thead>
-        <tbody id="history-body">
-          <tr><td colspan="8" class="empty-history">⬆️ ยังไม่มีรายการที่ทำในครั้งนี้</td></tr>
-        </tbody>
+        <thead><tr><th>#</th><th>วันที่-เวลา</th><th>ประเภท</th><th>รหัสสินค้า</th><th>ชื่อสินค้า</th><th>จำนวน</th><th>ผู้ทำรายการ</th><th>ลูกค้า/หมายเหตุ</th></tr></thead>
+        <tbody id="history-body"><tr><td colspan="8" class="empty-history">⬆️ ยังไม่มีรายการที่ทำในครั้งนี้</td></tr></tbody>
       </table>
     </div>
   </div>
@@ -269,8 +165,7 @@
     <div style="font-size:40px;margin-bottom:8px">🔐</div>
     <h3>ยืนยันตัวตน</h3>
     <p id="modal-user-label">กรุณาใส่รหัสผ่านของ <strong></strong></p>
-    <input type="password" id="modal-password" placeholder="••••••" maxlength="20"
-           onkeydown="if(event.key==='Enter')confirmPassword()">
+    <input type="password" id="modal-password" placeholder="••••••" maxlength="20" onkeydown="if(event.key==='Enter')confirmPassword()">
     <div class="error-msg" id="pw-error">❌ รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่</div>
     <div class="modal-btns">
       <button class="btn-cancel-modal" onclick="closeModal()">ยกเลิก</button>
@@ -283,7 +178,8 @@
 
 <script>
 // ==================== CLOUD DATABASE ====================
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxfzIcVJThtu_cOB5DCAqD9CRZMRtH2WTfKvhzNVfa183qmiyiT8LkFo8GlHUKZAjiVhg/exec"; 
+// ⚠️ แปะลิงก์ Google Apps Script URL ตรงนี้ (ที่ได้จากการ Deploy ใหม่สุด)
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwqeVRo2mtGuvpLS-QcJ6SY1XKOEjjQikqWW5aQFfddmYq2xMElqF_PKAn-BsWP1i6H/exec"; 
 
 let PRODUCTS = {};
 let productsLoaded = false;
@@ -298,62 +194,37 @@ window.onload = async function() {
     statusEl.innerHTML = `✔️ เชื่อมต่อคลาวด์สำเร็จ โหลดฐานข้อมูลแล้ว (${count.toLocaleString()} รายการ)`;
     statusEl.style.color = "#a3e635"; 
   } catch (error) {
-    console.error(error);
-    statusEl.innerHTML = "❌ ไม่สามารถดึงข้อมูลจาก Cloud ได้ กรุณาเช็คการตั้งค่าสิทธิ์ Deploy";
+    statusEl.innerHTML = "❌ ดึงข้อมูลไม่ได้ กรุณาเช็คการตั้งค่า Deploy หรือรันผ่านเซิร์ฟเวอร์ (GitHub Pages)";
     statusEl.style.color = "#f87171";
   }
 };
 
-// ==================== STATE ====================
-const PASSWORDS = { "ADMIN": "NTIadmin123", "Sittikorn": "sitt001", "Tree Vuthipong": "tree001", "Payungsak": "1tqfp647/35", "Supply C.": "sup001" };
-let currentTab = "receive";
-let withdrawType = null;
-let selectedCode = "";
-let pendingRecord = null;
-let acSelected = -1;
-let acResults = [];
-let history = [];
+const PASSWORDS = { "ADMIN": "admin123", "Sittikorn": "sitt001", "Tree Vuthipong": "tree001", "Payungsak": "pay001", "Supply C.": "sup001" };
+let currentTab = "receive"; let withdrawType = null; let selectedCode = ""; let pendingRecord = null; let acSelected = -1; let acResults = []; let history = [];
 
-// ==================== AUTOCOMPLETE & KEYDOWN ====================
 function updateNameDisplay(name, found) {
   const el = document.getElementById("inp-name");
-  if (!name) { 
-    el.value = ""; 
-    el.placeholder = "— ยังไม่ได้เลือกสินค้า —"; 
-    el.style.color = "#333";
-  } else if (found) { 
-    el.value = "✔ " + name; 
-    el.style.color = "#2e7d32"; 
-  } else { 
-    el.value = "⚠️ ไม่พบในฐานข้อมูล"; 
-    el.style.color = "#e65100"; 
-  }
+  if (!name) { el.value = ""; el.placeholder = "— ยังไม่ได้เลือกสินค้า —"; el.style.color = "#333"; }
+  else if (found) { el.value = "✔ " + name; el.style.color = "#2e7d32"; }
+  else { el.value = "⚠️ ไม่พบในฐานข้อมูล"; el.style.color = "#e65100"; }
 }
 
 function onCodeInput() {
   if (!productsLoaded) return;
   const val = document.getElementById("inp-code").value.trim();
-  selectedCode = "";
-  updateNameDisplay("", false);
-  acSelected = -1;
-  
+  selectedCode = ""; updateNameDisplay("", false); acSelected = -1;
   if (val.length < 2) { hideAC(); return; }
   
-  const lower = val.toLowerCase();
-  acResults = [];
+  const lower = val.toLowerCase(); acResults = [];
   for (const [code, name] of Object.entries(PRODUCTS)) {
-    if (code.toLowerCase().includes(lower)) {
-      acResults.push({code, name});
-      if (acResults.length >= 30) break;
-    }
+    if (code.toLowerCase().includes(lower)) { acResults.push({code, name}); if (acResults.length >= 30) break; }
   }
   if (acResults.length === 0) { hideAC(); return; }
   renderAC();
 }
 
 function renderAC() {
-  const list = document.getElementById("autocomplete-list");
-  list.innerHTML = "";
+  const list = document.getElementById("autocomplete-list"); list.innerHTML = "";
   acResults.forEach((item, i) => {
     const div = document.createElement("div");
     div.className = i === acSelected ? "selected" : "";
@@ -369,116 +240,59 @@ function onCodeKeydown(e) {
     e.preventDefault();
     const val = document.getElementById("inp-code").value.trim();
     if (!val) return;
-
-    if (acSelected >= 0 && acResults[acSelected]) {
-      selectProduct(acResults[acSelected].code, acResults[acSelected].name);
-      return;
-    }
+    if (acSelected >= 0 && acResults[acSelected]) { selectProduct(acResults[acSelected].code, acResults[acSelected].name); return; }
     const lowerVal = val.toLowerCase();
     for (const [code, name] of Object.entries(PRODUCTS)) {
-      if (code.toLowerCase() === lowerVal) {
-        selectProduct(code, name); 
-        return;
-      }
+      if (code.toLowerCase() === lowerVal) { selectProduct(code, name); return; }
     }
-    if (acResults.length > 0) {
-      selectProduct(acResults[0].code, acResults[0].name);
-    }
+    if (acResults.length > 0) { selectProduct(acResults[0].code, acResults[0].name); }
   } else if (e.key === "ArrowDown") {
-    if (!acResults.length) return;
-    acSelected = Math.min(acSelected + 1, acResults.length - 1);
-    renderAC();
-    e.preventDefault();
+    if (!acResults.length) return; acSelected = Math.min(acSelected + 1, acResults.length - 1); renderAC(); e.preventDefault();
   } else if (e.key === "ArrowUp") {
-    if (!acResults.length) return;
-    acSelected = Math.max(acSelected - 1, 0);
-    renderAC();
-    e.preventDefault();
-  } else if (e.key === "Escape") {
-    hideAC();
-  }
+    if (!acResults.length) return; acSelected = Math.max(acSelected - 1, 0); renderAC(); e.preventDefault();
+  } else if (e.key === "Escape") { hideAC(); }
 }
 
-function selectProduct(code, name) {
-  selectedCode = code;
-  document.getElementById("inp-code").value = code;
-  updateNameDisplay(name, true);
-  hideAC();
-}
+function selectProduct(code, name) { selectedCode = code; document.getElementById("inp-code").value = code; updateNameDisplay(name, true); hideAC(); }
+function hideAC() { document.getElementById("autocomplete-list").style.display = "none"; }
+document.addEventListener("click", e => { if (!e.target.closest(".product-wrap")) hideAC(); });
 
-function hideAC() {
-  document.getElementById("autocomplete-list").style.display = "none";
-}
-
-document.addEventListener("click", e => {
-  if (!e.target.closest(".product-wrap")) hideAC();
-});
-
-// ==================== TABS & WITHDRAW TYPE ====================
 function switchTab(tab) {
-  currentTab = tab;
-  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  currentTab = tab; document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
   document.querySelector(`.tab-btn.${tab}`).classList.add("active");
-  const wo = document.getElementById("withdraw-options");
-  const rrw = document.getElementById("receive-remark-wrap");
-  const btn = document.getElementById("btn-submit");
-  const title = document.getElementById("form-title");
+  const wo = document.getElementById("withdraw-options"); const rrw = document.getElementById("receive-remark-wrap");
+  const btn = document.getElementById("btn-submit"); const title = document.getElementById("form-title");
   
   if (tab === "withdraw") {
-    wo.style.display = "block";
-    rrw.style.display = "none";
-    btn.className = "btn-submit withdraw";
-    btn.textContent = "💾 บันทึกการเบิก";
-    title.textContent = "📤 บันทึกการเบิกสินค้า";
+    wo.style.display = "block"; rrw.style.display = "none"; btn.className = "btn-submit withdraw"; btn.textContent = "💾 บันทึกการเบิก"; title.textContent = "📤 บันทึกการเบิกสินค้า";
   } else {
-    wo.style.display = "none";
-    rrw.style.display = "block";
-    btn.className = "btn-submit receive";
-    btn.innerHTML = "💾 บันทึกรับเข้า";
-    title.textContent = "📥 บันทึกการรับสินค้าเข้า";
-    withdrawType = null;
-    document.getElementById("radio-customer").checked = false;
-    document.getElementById("radio-borrow").checked = false;
-    document.getElementById("customer-field").style.display = "none";
-    document.getElementById("borrow-field").style.display = "none";
+    wo.style.display = "none"; rrw.style.display = "block"; btn.className = "btn-submit receive"; btn.innerHTML = "💾 บันทึกรับเข้า"; title.textContent = "📥 บันทึกการรับสินค้าเข้า";
+    withdrawType = null; document.getElementById("radio-customer").checked = false; document.getElementById("radio-borrow").checked = false;
+    document.getElementById("customer-field").style.display = "none"; document.getElementById("borrow-field").style.display = "none";
     document.querySelectorAll(".radio-label").forEach(l => l.className = "radio-label");
   }
   clearErrors();
 }
 
 function setWithdrawType(type) {
-  withdrawType = type;
-  document.getElementById("radio-customer").checked = type === "customer";
-  document.getElementById("radio-borrow").checked = type === "borrow";
+  withdrawType = type; document.getElementById("radio-customer").checked = type === "customer"; document.getElementById("radio-borrow").checked = type === "borrow";
   document.getElementById("lbl-customer").className = "radio-label" + (type==="customer" ? " active-customer" : "");
   document.getElementById("lbl-borrow").className = "radio-label" + (type==="borrow" ? " active-borrow" : "");
   document.getElementById("customer-field").style.display = type === "customer" ? "block" : "none";
   document.getElementById("borrow-field").style.display = type === "borrow" ? "block" : "none";
 }
 
-// ==================== SUBMIT & VALIDATION ====================
 function clearErrors() { document.querySelectorAll(".error").forEach(el => el.classList.remove("error")); }
-
 function validate() {
-  clearErrors();
-  let ok = true;
-  const code = document.getElementById("inp-code").value.trim();
-  const qty = document.getElementById("inp-qty").value;
-  const user = document.getElementById("inp-user").value;
-  
+  clearErrors(); let ok = true;
+  const code = document.getElementById("inp-code").value.trim(); const qty = document.getElementById("inp-qty").value; const user = document.getElementById("inp-user").value;
   if (!code) { document.getElementById("inp-code").classList.add("error"); ok = false; }
   if (!qty || parseInt(qty) <= 0) { document.getElementById("inp-qty").classList.add("error"); ok = false; }
   if (!user) { document.getElementById("inp-user").classList.add("error"); ok = false; }
-  
   if (currentTab === "withdraw") {
     if (!withdrawType) { showToast("กรุณาเลือกประเภทการเบิก (ส่งลูกค้า / ยืม)", "error"); ok = false; }
-    else if (withdrawType === "customer") {
-      const cn = document.getElementById("inp-customer").value.trim();
-      if (!cn) { document.getElementById("inp-customer").classList.add("error"); ok = false; }
-    } else if (withdrawType === "borrow") {
-      const bn = document.getElementById("inp-borrow-note").value.trim();
-      if (!bn) { document.getElementById("inp-borrow-note").classList.add("error"); ok = false; }
-    }
+    else if (withdrawType === "customer" && !document.getElementById("inp-customer").value.trim()) { document.getElementById("inp-customer").classList.add("error"); ok = false; }
+    else if (withdrawType === "borrow" && !document.getElementById("inp-borrow-note").value.trim()) { document.getElementById("inp-borrow-note").classList.add("error"); ok = false; }
   }
   if (!ok && currentTab !== "withdraw") showToast("กรุณากรอกข้อมูลให้ครบถ้วน", "error");
   return ok;
@@ -486,90 +300,61 @@ function validate() {
 
 function handleSubmit() {
   if (!validate()) return;
-  const code = document.getElementById("inp-code").value.trim();
-  const name = selectedCode ? PRODUCTS[selectedCode] || code : code;
-  const qty = parseInt(document.getElementById("inp-qty").value);
-  const user = document.getElementById("inp-user").value;
+  const code = document.getElementById("inp-code").value.trim(); const name = selectedCode ? PRODUCTS[selectedCode] || code : code;
+  const qty = parseInt(document.getElementById("inp-qty").value); const user = document.getElementById("inp-user").value;
   const remark = currentTab === "receive" ? document.getElementById("inp-remark").value.trim() : "";
   let extra = "";
-  if (currentTab === "withdraw") {
-    if (withdrawType === "customer") extra = "ลูกค้า: " + document.getElementById("inp-customer").value.trim();
-    else extra = "ยืม: " + document.getElementById("inp-borrow-note").value.trim();
-  }
-  pendingRecord = { code, name, qty, user, type: currentTab, wtype: withdrawType, extra, remark };
-  openModal(user);
+  if (currentTab === "withdraw") extra = withdrawType === "customer" ? "ลูกค้า: " + document.getElementById("inp-customer").value.trim() : "ยืม: " + document.getElementById("inp-borrow-note").value.trim();
+  pendingRecord = { code, name, qty, user, type: currentTab, wtype: withdrawType, extra, remark }; openModal(user);
 }
 
-// ==================== PASSWORD ====================
 function openModal(user) {
   document.getElementById("modal-user-label").innerHTML = `กรุณาใส่รหัสผ่านของ <strong>${user}</strong>`;
-  document.getElementById("modal-password").value = "";
-  document.getElementById("pw-error").style.display = "none";
-  document.getElementById("modal-bg").classList.add("show");
-  setTimeout(() => document.getElementById("modal-password").focus(), 100);
+  document.getElementById("modal-password").value = ""; document.getElementById("pw-error").style.display = "none";
+  document.getElementById("modal-bg").classList.add("show"); setTimeout(() => document.getElementById("modal-password").focus(), 100);
 }
 function closeModal() { document.getElementById("modal-bg").classList.remove("show"); pendingRecord = null; }
-
 function confirmPassword() {
-  const pw = document.getElementById("modal-password").value;
-  if (pw !== PASSWORDS[pendingRecord.user]) {
-    document.getElementById("pw-error").style.display = "block";
-    document.getElementById("modal-password").value = "";
-    document.getElementById("modal-password").focus();
-    return;
+  if (document.getElementById("modal-password").value !== PASSWORDS[pendingRecord.user]) {
+    document.getElementById("pw-error").style.display = "block"; document.getElementById("modal-password").value = ""; document.getElementById("modal-password").focus(); return;
   }
-  closeModal();
-  saveRecord(pendingRecord);
+  closeModal(); saveRecord(pendingRecord);
 }
 
-// ==================== SAVE TO CLOUD ====================
 async function saveRecord(rec) {
-  showToast("⏳ กำลังบันทึกข้อมูลลงฐานข้อมูลระบบ...", "");
+  showToast("⏳ กำลังบันทึกข้อมูลลงฐานข้อมูล...", "");
   try {
     const response = await fetch(WEB_APP_URL, {
-      method: "POST",
-      body: JSON.stringify(rec),
-      redirect: "follow"
+      method: "POST", body: JSON.stringify(rec), headers: { "Content-Type": "text/plain" }
     });
     const result = await response.json();
     if (result.status === "success") {
       const now = new Date();
-      const dt = now.toLocaleDateString("th-TH",{day:"2-digit",month:"2-digit",year:"numeric"}) 
-               + " " + now.toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"});
+      const dt = now.toLocaleDateString("th-TH",{day:"2-digit",month:"2-digit",year:"numeric"}) + " " + now.toLocaleTimeString("th-TH",{hour:"2-digit",minute:"2-digit"});
       history.unshift({ ...rec, dt, id: history.length + 1 });
-      renderHistory();
-      resetForm();
-      showToast(rec.type === "receive" ? "✔ บันทึกรับเข้าคลาวด์สำเร็จ!" : "✔ บันทึกการเบิกคลาวด์สำเร็จ!", "success");
+      renderHistory(); resetForm();
+      showToast(rec.type === "receive" ? "✔ บันทึกรับเข้าสำเร็จ!" : "✔ บันทึกการเบิกสำเร็จ!", "success");
     } else {
       showToast("❌ Error ฝั่งเซิร์ฟเวอร์: " + (result.message || "ไม่ทราบสาเหตุ"), "error");
     }
   } catch (error) {
-    showToast("❌ Error การเชื่อมต่อ: " + error.message, "error");
+    showToast("❌ Error การเชื่อมต่อ (อาจเกิดจาก CORS): " + error.message, "error");
   }
 }
 
-// ==================== UI HELPERS ====================
 function resetForm() {
-  document.getElementById("inp-code").value = "";
-  const nameEl = document.getElementById("inp-name");
+  document.getElementById("inp-code").value = ""; const nameEl = document.getElementById("inp-name");
   nameEl.value = ""; nameEl.placeholder = "— ยังไม่ได้เลือกสินค้า —"; nameEl.style.color = "#333";
-  document.getElementById("inp-qty").value = "";
-  document.getElementById("inp-remark").value = "";
-  document.getElementById("inp-customer").value = "";
-  document.getElementById("inp-borrow-note").value = "";
-  document.getElementById("inp-user").value = "";
+  document.getElementById("inp-qty").value = ""; document.getElementById("inp-remark").value = ""; document.getElementById("inp-customer").value = "";
+  document.getElementById("inp-borrow-note").value = ""; document.getElementById("inp-user").value = "";
   selectedCode = ""; withdrawType = null; hideAC();
-  document.getElementById("radio-customer").checked = false;
-  document.getElementById("radio-borrow").checked = false;
-  document.getElementById("customer-field").style.display = "none";
-  document.getElementById("borrow-field").style.display = "none";
-  document.querySelectorAll(".radio-label").forEach(l => l.className = "radio-label");
-  clearErrors();
+  document.getElementById("radio-customer").checked = false; document.getElementById("radio-borrow").checked = false;
+  document.getElementById("customer-field").style.display = "none"; document.getElementById("borrow-field").style.display = "none";
+  document.querySelectorAll(".radio-label").forEach(l => l.className = "radio-label"); clearErrors();
 }
 
 function renderHistory() {
-  const tbody = document.getElementById("history-body");
-  document.getElementById("hist-count").textContent = history.length;
+  const tbody = document.getElementById("history-body"); document.getElementById("hist-count").textContent = history.length;
   if (!history.length) return;
   tbody.innerHTML = history.map((r,i) => {
     const typeBadge = r.type === "receive" ? `<span class="badge receive">📥 รับเข้า</span>` : `<span class="badge withdraw">📤 เบิก</span>`;
@@ -577,19 +362,15 @@ function renderHistory() {
       ? (r.wtype === "customer" ? `<span class="badge customer">📦 ส่งลูกค้า</span><br><small>${r.extra.replace("ลูกค้า: ","")}</small>` : `<span class="badge borrow">🔄 ยืม</span><br><small>${r.extra.replace("ยืม: ","")}</small>`)
       : (r.remark || "—");
     return `<tr>
-      <td style="color:#888;font-weight:600">${history.length - i}</td>
-      <td style="white-space:nowrap;font-size:11px">${r.dt}</td>
-      <td>${typeBadge}</td><td><strong>${r.code}</strong></td>
-      <td style="max-width:200px;font-size:12px">${r.name}</td>
-      <td style="text-align:center;font-weight:700">${r.qty.toLocaleString()}</td>
-      <td>${r.user}</td><td style="font-size:12px">${extraBadge}</td>
+      <td style="color:#888;font-weight:600">${history.length - i}</td><td style="white-space:nowrap;font-size:11px">${r.dt}</td>
+      <td>${typeBadge}</td><td><strong>${r.code}</strong></td><td style="max-width:200px;font-size:12px">${r.name}</td>
+      <td style="text-align:center;font-weight:700">${r.qty.toLocaleString()}</td><td>${r.user}</td><td style="font-size:12px">${extraBadge}</td>
     </tr>`;
   }).join("");
 }
 
 function showToast(msg, type = "") {
-  const t = document.getElementById("toast");
-  t.textContent = msg; t.className = "toast show " + type;
+  const t = document.getElementById("toast"); t.textContent = msg; t.className = "toast show " + type;
   setTimeout(() => t.classList.remove("show"), 3000);
 }
 </script>
